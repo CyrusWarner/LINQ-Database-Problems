@@ -16,8 +16,8 @@ namespace DatabaseFirstLINQ
         public void RunLINQQueries()
         {
             ProblemOne();
-            //ProblemTwo();
-            //ProblemThree();
+            ProblemTwo();
+            ProblemThree();
             //ProblemFour();
             //ProblemFive();
             //ProblemSix();
@@ -64,6 +64,12 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that gets each product where the products price is greater than $150.
             // Then print the name and price of each product from the above query to the console.
+            var products = _context.Products;
+            var productsPriceQuery = products.Where(product => product.Price > 150);
+            foreach(var product in productsPriceQuery)
+            {
+                Console.WriteLine($"{product.Name}: {product.Price} dollars");
+            }
 
         }
 
