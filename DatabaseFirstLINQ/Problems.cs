@@ -22,7 +22,7 @@ namespace DatabaseFirstLINQ
             //ProblemFive(); COMPLETED
             //ProblemSix(); COMPLETED
             //ProblemSeven(); COMPLETED
-            //ProblemEight();//THESE THREE COME BACK TO ON MONDAY AND FIGURE OUT WITH PARTNER PROBLEM 8, 9, 10
+            ProblemEight();
             //ProblemNine(); COMPLETED
             //ProblemTen(); COMPLETED
             //ProblemEleven(); COMPLETED
@@ -33,8 +33,8 @@ namespace DatabaseFirstLINQ
             //ProblemSixteen(); COMPLETED
             //ProblemSeventeen(); COMPLETED
             //ProblemEighteen(); COMPLETED
-            ProblemNineteen();
-            ProblemTwenty();
+            //ProblemNineteen(); COMPLETED 
+            //ProblemTwenty(); COMPLETED
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -128,7 +128,13 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "afton@gmail.com".
             // Then print the product's name, price, and quantity to the console.
-            
+            var shoppingCartProducts = _context.ShoppingCarts.Include(user => user.User).Include(products => products.Product).Where(user => user.User.Email == "afton@gmail.com");
+            foreach (ShoppingCart products in shoppingCartProducts)
+            {
+                Console.WriteLine($"{products.Product.Name} {products.Product.Price} {products.Quantity}");
+            }
+
+
 
 
 
