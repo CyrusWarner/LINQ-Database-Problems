@@ -18,11 +18,11 @@ namespace DatabaseFirstLINQ
             ProblemOne();
             ProblemTwo();
             ProblemThree();
-            //ProblemFour();
+            ProblemFour();
             ProblemFive();
             ProblemSix();
-            //ProblemSeven();
-            //ProblemEight();
+            ProblemSeven();
+            ProblemEight();
             //ProblemNine();
             //ProblemTen();
             //ProblemEleven();
@@ -74,15 +74,15 @@ namespace DatabaseFirstLINQ
         }
 
         private void ProblemFour()
-        {//COME BACK TO
+        {
             // Write a LINQ query that gets each product that contains an "s" in the products name.
             // Then print the name of each product from the above query to the console.
-            //var products = _context.Products;
-            //var productLetterQuery = products.Where(product => product.Name.ToLower().Contains('a')).ToArray();
-            //foreach(var product in productLetterQuery)
-            //{
-            //    Console.WriteLine($"hi");
-            //}
+            var products = _context.Products;
+            var productLetterQuery = products.Where(product => product.Name.Contains("s"));
+            foreach(var product in productLetterQuery)
+            {
+                Console.WriteLine(product.Name);
+            }
 
         }
 
@@ -128,6 +128,9 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "afton@gmail.com".
             // Then print the product's name, price, and quantity to the console.
+            
+
+
 
         }
 
