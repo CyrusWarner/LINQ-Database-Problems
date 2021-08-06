@@ -19,7 +19,7 @@ namespace DatabaseFirstLINQ
             ProblemTwo();
             ProblemThree();
             //ProblemFour();
-            //ProblemFive();
+            ProblemFive();
             //ProblemSix();
             //ProblemSeven();
             //ProblemEight();
@@ -74,9 +74,15 @@ namespace DatabaseFirstLINQ
         }
 
         private void ProblemFour()
-        {
+        {//COME BACK TO
             // Write a LINQ query that gets each product that contains an "s" in the products name.
             // Then print the name of each product from the above query to the console.
+            //var products = _context.Products;
+            //var productLetterQuery = products.Where(product => product.Name.ToLower().Contains('a')).ToArray();
+            //foreach(var product in productLetterQuery)
+            //{
+            //    Console.WriteLine($"hi");
+            //}
 
         }
 
@@ -84,6 +90,15 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that gets all of the users who registered BEFORE 2016
             // Then print each user's email and registration date to the console.
+            var users = _context.Users;
+            var dateRegistered = "1/1/2016";
+            var stringToDate = DateTime.Parse(dateRegistered);
+
+            var usersRegistered = users.Where(user => user.RegistrationDate.Value.Year < 2016);
+            foreach (var user in usersRegistered)
+            {
+                Console.WriteLine($"{user.Email}-{user.RegistrationDate}");
+            }
 
         }
 
