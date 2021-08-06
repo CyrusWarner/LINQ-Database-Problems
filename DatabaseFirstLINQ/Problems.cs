@@ -15,22 +15,22 @@ namespace DatabaseFirstLINQ
         }
         public void RunLINQQueries()
         {
-            ProblemOne();
-            ProblemTwo();
-            ProblemThree();
-            ProblemFour();
-            ProblemFive();
-            ProblemSix();
-            ProblemSeven();
+            //ProblemOne(); COMPLETED
+            //ProblemTwo(); COMPLETED
+            //ProblemThree(); COMPLETED
+            //ProblemFour(); COMPLETED
+            //ProblemFive(); COMPLETED
+            //ProblemSix(); COMPLETED
+            //ProblemSeven(); COMPLETED
             //ProblemEight();//THESE THREE COME BACK TO ON MONDAY AND FIGURE OUT WITH PARTNER PROBLEM 8, 9, 10
-            //ProblemNine();
-            //ProblemTen();
-            //ProblemEleven();
-            //ProblemTwelve();
-            //ProblemThirteen();
-            ProblemFourteen();
+            //ProblemNine(); COMPLETED
+            //ProblemTen(); COMPLETED
+            //ProblemEleven(); COMPLETED
+            //ProblemTwelve(); COMPLETED
+            //ProblemThirteen(); COMPLETED
+            //ProblemFourteen(); COMPLETED
             //ProblemFifteen();
-            //ProblemSixteen();
+            ProblemSixteen();
             //ProblemSeventeen();
             //ProblemEighteen();
             //ProblemNineteen();
@@ -224,6 +224,11 @@ namespace DatabaseFirstLINQ
         private void ProblemSixteen()
         {
             // Update the price of the product you created to something different using LINQ.
+            var products = _context.Products;
+            var product = products.Where(p => p.Id == 9).SingleOrDefault();
+            product.Name = "Chicken";
+            _context.Products.Update(product);
+            _context.SaveChanges();
 
         }
 
