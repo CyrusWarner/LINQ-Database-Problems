@@ -399,7 +399,7 @@ namespace DatabaseFirstLINQ
                 case "5":
                     break;
                 default:
-                    Console.WriteLine("Please choose a number using the numbers 1-4");
+                    Console.WriteLine("Please choose a number between the numbers 1-5");
                     SignInOptions(userId);
                     break;
             }
