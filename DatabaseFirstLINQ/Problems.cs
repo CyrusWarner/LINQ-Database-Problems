@@ -387,7 +387,7 @@ namespace DatabaseFirstLINQ
                     UserProducts(userId);
                     break;
                 case "2":
-                    ShowAllProducts();
+                    ShowAllProducts(userId);
                     break;
                 case "3":
                     AddProductToShoppingCart(userId);
@@ -396,8 +396,8 @@ namespace DatabaseFirstLINQ
                     RemoveProductFromShoppingCart(userId);
                     break;
                 default:
-                    Console.WriteLine("Please choose a number using the numbers 1-4"); 
-                    //COME BACK AND ADD LOGIC TO REPROMPT THE USER
+                    Console.WriteLine("Please choose a number using the numbers 1-4");
+                    SignInOptions(userId);
                     break;
             }
             
@@ -410,17 +410,18 @@ namespace DatabaseFirstLINQ
             {
                 Console.WriteLine($"Quantity {userProduct.Quantity}: {userProduct.Product.Name}");
             }
-
+            SignInOptions(userId);
         }
 
-        private void ShowAllProducts()
+        private void ShowAllProducts(int userId)
         {
             var allProducts = _context.Products;
             foreach (var product in allProducts)
             {
                 Console.WriteLine($"Name:{product.Name} Price: {product.Price}");
             }
-        }
+            SignInOptions(userId);
+        }   
 
         private void AddProductToShoppingCart(int userId)
         {
@@ -443,6 +444,7 @@ namespace DatabaseFirstLINQ
             };
             _context.ShoppingCarts.Add(newUserProduct);
             _context.SaveChanges();
+            SignInOptions(userId);
         }
 
         private void RemoveProductFromShoppingCart(int userId)
@@ -460,6 +462,7 @@ namespace DatabaseFirstLINQ
                 _context.ShoppingCarts.Remove(userProductRelationship);
             }
             _context.SaveChanges();
+            SignInOptions(userId);
         }
     }
 
