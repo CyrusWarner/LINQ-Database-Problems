@@ -393,6 +393,7 @@ namespace DatabaseFirstLINQ
                     AddProductToShoppingCart(userId);
                     break;
                 case "4":
+                    RemoveProductFromShoppingCart(userId);
                     break;
                 default:
                     Console.WriteLine("Please choose a number using the numbers 1-4"); 
@@ -443,5 +444,24 @@ namespace DatabaseFirstLINQ
             _context.ShoppingCarts.Add(newUserProduct);
             _context.SaveChanges();
         }
+
+        private void RemoveProductFromShoppingCart(int userId)
+        {
+            var userProducts = _context.ShoppingCarts.Include(sc => sc.Product).Where(ur => ur.UserId == userId);
+            foreach (var product in userProducts)
+            {
+                Console.WriteLine($"({product.Product.Id}) {product.Product.Name}");
+            }
+            Console.WriteLine("Remove a product from your shopping cart");
+            int productInCart = Convert.ToInt32(Console.ReadLine());
+            var shoppingCartProducts = _context.ShoppingCarts.Where(sc => sc.User.Id == userId).Where(sc => sc.Product.Id == productInCart);
+            foreach (ShoppingCart userProductRelationship in shoppingCartProducts)
+            {
+                _context.ShoppingCarts.Remove(userProductRelationship);
+            }
+            _context.SaveChanges();
+        }
     }
+
+
 }
