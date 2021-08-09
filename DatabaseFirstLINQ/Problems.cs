@@ -390,6 +390,7 @@ namespace DatabaseFirstLINQ
                     ShowAllProducts();
                     break;
                 case "3":
+                    AddProductToShoppingCart(userId);
                     break;
                 case "4":
                     break;
@@ -420,5 +421,27 @@ namespace DatabaseFirstLINQ
             }
         }
 
+        private void AddProductToShoppingCart(int userId)
+        {
+            var AllProducts = _context.Products;
+            foreach (var product in AllProducts)
+            {
+                Console.WriteLine($"({product.Id}) {product.Name}");
+            }
+            Console.WriteLine("Add a product to your shopping cart using the numbers shown");
+            int productInCart = Convert.ToInt32(Console.ReadLine());
+            if (productInCart.GetType() != typeof(int))
+            {
+                Console.WriteLine("Please select an integer");
+            }
+            ShoppingCart newUserProduct = new ShoppingCart()
+            {
+                UserId = userId,
+                ProductId = productInCart,
+                Quantity = 1,
+            };
+            _context.ShoppingCarts.Add(newUserProduct);
+            _context.SaveChanges();
+        }
     }
 }
