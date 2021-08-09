@@ -374,6 +374,7 @@ namespace DatabaseFirstLINQ
                 "(2) View all products ",
                 "(3) Add a product to the shopping cart",
                 "(4) remove a product from the shopping cart",
+                "(5) Exit the menu",
             };
             foreach (string option in options)
             {
@@ -394,6 +395,8 @@ namespace DatabaseFirstLINQ
                     break;
                 case "4":
                     RemoveProductFromShoppingCart(userId);
+                    break;
+                case "5":
                     break;
                 default:
                     Console.WriteLine("Please choose a number using the numbers 1-4");
