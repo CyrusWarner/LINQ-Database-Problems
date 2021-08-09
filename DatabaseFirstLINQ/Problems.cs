@@ -387,6 +387,7 @@ namespace DatabaseFirstLINQ
                     UserProducts(userId);
                     break;
                 case "2":
+                    ShowAllProducts();
                     break;
                 case "3":
                     break;
@@ -405,9 +406,18 @@ namespace DatabaseFirstLINQ
             var userProducts = _context.ShoppingCarts.Include(sc => sc.Product).Where(ur => ur.UserId == userId);   
             foreach(ShoppingCart userProduct in userProducts)
             {
-                Console.WriteLine($"Quantity-{userProduct.Quantity}: {userProduct.Product.Name}");
+                Console.WriteLine($"Quantity {userProduct.Quantity}: {userProduct.Product.Name}");
             }
 
+        }
+
+        private void ShowAllProducts()
+        {
+            var allProducts = _context.Products;
+            foreach (var product in allProducts)
+            {
+                Console.WriteLine($"Name:{product.Name} Price: {product.Price}");
+            }
         }
 
     }
