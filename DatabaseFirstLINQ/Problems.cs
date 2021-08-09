@@ -36,8 +36,8 @@ namespace DatabaseFirstLINQ
             //ProblemEighteen(); COMPLETED
             //ProblemNineteen(); COMPLETED 
             //ProblemTwenty(); COMPLETED
-            BonusOne();
-            //BonusThree();
+            //BonusOne(); COMPLETED
+              SignIn();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -335,7 +335,7 @@ namespace DatabaseFirstLINQ
         }
 
         // BIG ONE
-        private void BonusThree()
+        private void SignIn()
         {
             // 1. Create functionality for a user to sign in via the console COMPLETED
             // 2. If the user succesfully signs in COMPLETED
@@ -347,31 +347,65 @@ namespace DatabaseFirstLINQ
             // 3. If the user does not succesfully sing in COMPLETED
             // a. Display "Invalid Email or Password" COMPLETED
             // b. Re-prompt the user for credentials COMPLETED
-            List<string> options = new List<string>()
-            {
-                "View products in your shopping cart",
-                "View all products ",
-                "Add a product to the shopping cart",
-                "remove a product from the shopping cart",
-            };
+
             Console.WriteLine("Please Enter Your Email");
             string userEmail = Console.ReadLine();
             Console.WriteLine("Please Enter Your Password");
             string userPassword = Console.ReadLine();
-            var users = _context.Users.Where(user => user.Email == userEmail && user.Password == userPassword);
-            foreach (User user in users)
+            var user = _context.Users.Where(user => user.Email == userEmail && user.Password == userPassword).SingleOrDefault();
+            if (user != null)
             {
-                if (user.Email != null)
-                {
-                    {
-                        Console.WriteLine("Signed in");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Email Or Password");
-                    BonusThree();
-                }
+                Console.WriteLine("Signed In");
+                SignInOptions(user.Id);
+            }
+            else
+            {
+                Console.WriteLine("Invalid Email Or Password");
+                SignIn();
+            }
+
+
+        }
+        private void SignInOptions(int userId)
+        {
+            List<string> options = new List<string>()
+            {
+                "(1) View products in your shopping cart",
+                "(2) View all products ",
+                "(3) Add a product to the shopping cart",
+                "(4) remove a product from the shopping cart",
+            };
+            foreach (string option in options)
+            {
+                Console.WriteLine(option);
+            }
+            Console.WriteLine("Please choose an option using numbers 1-4");
+            string stringInput = Console.ReadLine();
+            switch (stringInput)
+            {
+                case "1":
+                    UserProducts(userId);
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                default:
+                    Console.WriteLine("Please choose a number using the numbers 1-4"); 
+                    //COME BACK AND ADD LOGIC TO REPROMPT THE USER
+                    break;
+            }
+            
+        }
+
+        private void UserProducts(int userId)
+        {
+            var userProducts = _context.ShoppingCarts.Include(sc => sc.Product).Where(ur => ur.UserId == userId);   
+            foreach(ShoppingCart userProduct in userProducts)
+            {
+                Console.WriteLine($"Quantity-{userProduct.Quantity}: {userProduct.Product.Name}");
             }
 
         }
