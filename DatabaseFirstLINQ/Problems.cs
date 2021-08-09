@@ -22,8 +22,8 @@ namespace DatabaseFirstLINQ
             //ProblemFive(); COMPLETED
             //ProblemSix(); COMPLETED
             //ProblemSeven(); COMPLETED
-            //ProblemEight();
-            ProblemNine();
+            //ProblemEight(); COMPLETED
+            //ProblemNine(); COMPLETED
             //ProblemTen(); COMPLETED
             //ProblemEleven(); COMPLETED
             //ProblemTwelve(); COMPLETED
@@ -35,6 +35,7 @@ namespace DatabaseFirstLINQ
             //ProblemEighteen(); COMPLETED
             //ProblemNineteen(); COMPLETED 
             //ProblemTwenty(); COMPLETED
+            BonusOne();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -153,6 +154,10 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that retreives all of the products in the shopping cart of users who have the role of "Employee".
             // Then print the user's email as well as the product's name, price, and quantity to the console.
+            // COME BACK TO AND TRY AGAIN
+            var employees = _context.UserRoles.Where(user => user.Role.RoleName == "Employee").Select(user => user.UserId);
+            var shoppingCartEmployeeProducts = _context.ShoppingCarts.Include(sc => sc.Product).Include(sc => sc.User).Where(sc => employees.Contains(sc.UserId));
+
 
         }
 
@@ -301,6 +306,22 @@ namespace DatabaseFirstLINQ
             // Prompt the user to enter in an email and password through the console.
             // Take the email and password and check if the there is a person that matches that combination.
             // Print "Signed In!" to the console if they exists and the values match otherwise print "Invalid Email or Password.".
+            Console.WriteLine("Please enter your email");
+            string userEmail = Console.ReadLine();
+            Console.WriteLine("Please enter your password");
+            string userPassword = Console.ReadLine(); 
+            var users = _context.Users.Where(user => user.Email == userEmail && user.Password == userPassword);
+            foreach (User user in users)
+            {
+                if(user.Email != null)
+                {
+                    Console.WriteLine("Signed in");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Email or Password");
+                }
+            }
         }
 
         private void BonusTwo()
