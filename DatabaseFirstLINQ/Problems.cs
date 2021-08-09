@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using DatabaseFirstLINQ.Models;
+using System.Collections.Generic;
 
 namespace DatabaseFirstLINQ
 {
@@ -36,6 +37,7 @@ namespace DatabaseFirstLINQ
             //ProblemNineteen(); COMPLETED 
             //ProblemTwenty(); COMPLETED
             BonusOne();
+            //BonusThree();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -157,6 +159,12 @@ namespace DatabaseFirstLINQ
             // COME BACK TO AND TRY AGAIN
             var employees = _context.UserRoles.Where(user => user.Role.RoleName == "Employee").Select(user => user.UserId);
             var shoppingCartEmployeeProducts = _context.ShoppingCarts.Include(sc => sc.Product).Include(sc => sc.User).Where(sc => employees.Contains(sc.UserId));
+
+            foreach(ShoppingCart employee in shoppingCartEmployeeProducts)
+            {
+                Console.WriteLine($"{employee.User.Email}");
+                Console.WriteLine($"Product Name:{employee.Product.Name}, Product Price:{employee.Product.Price}, Product Quantity:{employee.Quantity}");
+            }
 
 
         }
@@ -313,15 +321,11 @@ namespace DatabaseFirstLINQ
             var users = _context.Users.Where(user => user.Email == userEmail && user.Password == userPassword);
             foreach (User user in users)
             {
-                if(user.Email != null)
-                {
-                    Console.WriteLine("Signed in");
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Email or Password");
-                }
+              Console.WriteLine("Signed in");
+                return;
             }
+            Console.WriteLine("Invalid Email or Password");
+            BonusOne();
         }
 
         private void BonusTwo()
@@ -333,16 +337,42 @@ namespace DatabaseFirstLINQ
         // BIG ONE
         private void BonusThree()
         {
-            // 1. Create functionality for a user to sign in via the console
-            // 2. If the user succesfully signs in
-            // a. Give them a menu where they perform the following actions within the console
+            // 1. Create functionality for a user to sign in via the console COMPLETED
+            // 2. If the user succesfully signs in COMPLETED
+            // a. Give them a menu where they perform the following actions within the console COMPLETED
             // View the products in their shopping cart
             // View all products in the Products table
             // Add a product to the shopping cart (incrementing quantity if that product is already in their shopping cart)
             // Remove a product from their shopping cart
-            // 3. If the user does not succesfully sing in
-            // a. Display "Invalid Email or Password"
-            // b. Re-prompt the user for credentials
+            // 3. If the user does not succesfully sing in COMPLETED
+            // a. Display "Invalid Email or Password" COMPLETED
+            // b. Re-prompt the user for credentials COMPLETED
+            List<string> options = new List<string>()
+            {
+                "View products in your shopping cart",
+                "View all products ",
+                "Add a product to the shopping cart",
+                "remove a product from the shopping cart",
+            };
+            Console.WriteLine("Please Enter Your Email");
+            string userEmail = Console.ReadLine();
+            Console.WriteLine("Please Enter Your Password");
+            string userPassword = Console.ReadLine();
+            var users = _context.Users.Where(user => user.Email == userEmail && user.Password == userPassword);
+            foreach (User user in users)
+            {
+                if (user.Email != null)
+                {
+                    {
+                        Console.WriteLine("Signed in");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Email Or Password");
+                    BonusThree();
+                }
+            }
 
         }
 
