@@ -6,11 +6,7 @@ Creates a pleasing user interface for Software Developers looking to track what 
 ## Table of Contents
 - [Project Status](#project-status)
    - [Goals](#goals)
-   - [Task List](#task-list)
-   - [Future Tasks](#future-tasks)
 - [Technologies](#technologies)
-- [Bugs](#bugs)
-- [Images](#Images)
 
 ---
 ## Project Status :green_circle:
